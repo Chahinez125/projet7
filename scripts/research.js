@@ -4,6 +4,7 @@ const buttonSearch = document.querySelector("button");
 const searchInput = document.querySelector("#search");
 
 // Fonction de recherche
+
 function search() {
   const searchValue = searchInput.value.toLowerCase().trim();
   const filteredRecipes = recipes.filter((recipe) => {
