@@ -10,7 +10,7 @@ function search() {
   const filteredRecipes = [];
   let i = 0;
   while (i < recipes.length) {
-    const recipe = recipe[i];
+    const recipe = recipes[i];
     if (
       recipe.name.toLowerCase().includes(searchValue) ||
       recipe.description.toLowerCase().includes(searchValue) ||
@@ -23,6 +23,7 @@ function search() {
     i++;
   }
   displayRecipe(filteredRecipes);
+
   
   // Affichage du message d'erreur si nécessaire
   const errorResearch = document.querySelector(".error_research");
