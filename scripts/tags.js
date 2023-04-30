@@ -10,7 +10,7 @@ function createTag(element) {
   // Définition du HTML pour le tag
   const tagHtml = `
         <p>${element.innerText}</p>
-        <img class="close_tag" alt="Fermer le tag">
+        <img src="./assets/close.png" class="close_tag" alt="Fermer le tag">
       `;
   // Insertion du HTML dans l'élément div
   tag.innerHTML = tagHtml;
@@ -84,38 +84,47 @@ elementsOfTags.forEach((element) => {
 
 // Fonction pour afficher les recettes filtrées
 function displayRecipeFilter() {
-  // Set search input value to empty
-  searchInput.value = "";
+    // Mettre la valeur de la recherche à vide
+    document.getElementById("search").value = "";
   
-  // Get all selected tags
-  const allTags = document.querySelectorAll(".tags");
-
-  // Filter recipes based on selected tags
-  const filteredRecipes = recipes.filter((recipe) => {
-    // Check if all tags match recipe's ingredients, appliances and ustensils
-    return Array.from(allTags).every((tag) => {
-      const category = tag.getAttribute("categorie");
-      if (category === "ingredient") {
-        // Check if recipe has ingredient that matches tag
-        return recipe.ingredients.some(
-          (ingredient) => ingredient.ingredient.toLowerCase() === tag.innerText.toLowerCase()
-        );
-      } else if (category === "appliance") {
-        // Check if recipe's appliance matches tag
-        return recipe.appliance.toLowerCase().includes(tag.innerText.toLowerCase());
-      } else if (category === "ustensil") {
-        // Check if recipe has ustensil that matches tag
-        return recipe.ustensils.some(
-          (ustensil) => ustensil.toLowerCase() === tag.innerText.toLowerCase()
-        );
-      }
+    // Sélectionner tous les éléments ayant la classe "tags"
+    let allTags = document.querySelectorAll(".tags");
+    
+    // Filtrer les recettes en utilisant la méthode filter()
+    inputRecipeaArray = recipes.filter((recipe) => {
+      // Vérifier si tous les tags correspondent aux ingrédients, aux appareils et aux ustensiles de la recette
+      return Array.from(allTags).every((tag) => {
+        // Si le tag a l'attribut "categorie" égal à "ingredient"
+        if (tag.getAttribute("categorie") === "ingredient") {
+          // Récupérer les ingrédients de la recette
+          let ingredients = recipe.ingredients;
+          // Vérifier si au moins un ingrédient de la recette correspond au tag
+          return ingredients.some((ingredient) => {
+            return (
+              ingredient.ingredient.toLowerCase() ===
+              tag.innerText.toLowerCase()
+            );
+          });
+        // Si le tag a l'attribut "categorie" égal à "appliance"
+        } else if (tag.getAttribute("categorie") === "appliance") {
+          // Vérifier si l'appareil de la recette correspond au tag
+          return recipe.appliance
+            .toLowerCase()
+            .includes(tag.innerText.toLowerCase());
+        // Si le tag a l'attribut "categorie" égal à "ustensil"
+        } else if (tag.getAttribute("categorie") === "ustensil") {
+          // Récupérer les ustensiles de la recette
+          let ustensils = recipe.ustensils;
+          // Vérifier si au moins un ustensil de la recette correspond au tag
+          return ustensils.some((ustensil) => {
+            return ustensil.toLowerCase() === tag.innerText.toLowerCase();
+          });
+        }
+      });
     });
-  });
-
-  // Display filtered recipes
-  displayRecipe(filteredRecipes);
-}
-
+    // Afficher les recettes filtrées
+    displayRecipe(inputRecipeaArray);
+  }
   // Exécuter la fonction displayRecipeFilter()
   displayRecipeFilter();
   

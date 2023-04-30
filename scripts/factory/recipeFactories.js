@@ -72,8 +72,8 @@ function recipesFactory(data) {
   return { getRecipeCardDOM };
 }
 
-const recipe1 = recipesFactory(recipes[0]);
+const recipe1 = recipesFactory(recipe1[0]);
 document.body.appendChild(recipe1.getRecipeCardDOM());
 
-const recipe2 = recipesFactory(recipes[1]);
+const recipe2 = recipesFactory(recipe2[1]);
 document.body.appendChild(recipe2.getRecipeCardDOM());

@@ -7,20 +7,30 @@ const searchInput = document.querySelector("#search");
 
 function search() {
   const searchValue = searchInput.value.toLowerCase().trim();
-  const filteredRecipes = recipes.filter((recipe) => {
-    return (
+  const filteredRecipes = [];
+  let i = 0;
+  while (i < recipes.length) {
+    const recipe = recipe[i];
+    if (
       recipe.name.toLowerCase().includes(searchValue) ||
       recipe.description.toLowerCase().includes(searchValue) ||
       recipe.ingredients.some((ingredient) =>
         ingredient.ingredient.toLowerCase().includes(searchValue)
       )
-    );
-  });
+    ) {
+      filteredRecipes.push(recipe);
+    }
+    i++;
+  }
   displayRecipe(filteredRecipes);
   
   // Affichage du message d'erreur si nécessaire
-  document.querySelector(".error_research").style.display =
-    filteredRecipes.length === 0 ? "block" : "none";
+  const errorResearch = document.querySelector(".error_research");
+  if (filteredRecipes.length === 0) {
+    errorResearch.style.display = "block";
+  } else {
+    errorResearch.style.display = "none";
+  }
 }
 
 // Ajout d'un écouteur d'événement au clic sur le bouton de recherche
