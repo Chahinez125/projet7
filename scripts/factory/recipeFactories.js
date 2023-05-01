@@ -1,15 +1,17 @@
+/*prend en paramètre un objet de données qui contient les informations d'une recette*/
+//obtenir les propriétés de l'objet
 function recipesFactory(data) {
   const { id, name, time, description, ingredients } = data;
-  const picture = `./assets/savoureux.jpeg`;
-
+//retourne l'élément DOM complet pour une recette
   function getRecipeCardDOM() {
+   //L'élément DOM principal est créé avec la balise article, qui contient une classe recipe_card et un ID correspondant à l'ID de la recette
     const card = document.createElement("article");
     card.classList.add("recipe_card");
     card.id = id;
 
     const image = document.createElement("img");
     image.classList.add("recipe_card__image");
-    image.src = picture;
+    image.src = `./assets/plats.jpg`;
     image.alt = name;
     card.appendChild(image);
 
@@ -71,9 +73,3 @@ function recipesFactory(data) {
 
   return { getRecipeCardDOM };
 }
-
-const recipe1 = recipesFactory(recipe1[0]);
-document.body.appendChild(recipe1.getRecipeCardDOM());
-
-const recipe2 = recipesFactory(recipe2[1]);
-document.body.appendChild(recipe2.getRecipeCardDOM());
